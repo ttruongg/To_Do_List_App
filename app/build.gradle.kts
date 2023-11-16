@@ -6,6 +6,7 @@ android {
     namespace = "com.example.to_do_list_app"
     compileSdk = 34
 
+    viewBinding.enable = true
     defaultConfig {
         applicationId = "com.example.to_do_list_app"
         minSdk = 24
