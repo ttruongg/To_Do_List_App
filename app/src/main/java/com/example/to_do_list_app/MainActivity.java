@@ -28,14 +28,6 @@ public class MainActivity extends AppCompatActivity {
         binding.tasksRecyclerView.setLayoutManager(layoutManager);
         taskAdapter = new TaskAdapter(this);
         binding.tasksRecyclerView.setAdapter(taskAdapter);
-
-
-
-        taskList.add(new Task(1,0,"This is a task, for example"));
-        taskList.add(new Task(1,0,"This is a task, for example"));
-        taskList.add(new Task(1,0,"This is a task, for example"));
-
-
         taskAdapter.setData(taskList);
 
 
