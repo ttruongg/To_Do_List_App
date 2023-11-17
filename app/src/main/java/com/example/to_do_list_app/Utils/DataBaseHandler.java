@@ -27,7 +27,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     private SQLiteDatabase db;
 
-    public DataBaseHandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
