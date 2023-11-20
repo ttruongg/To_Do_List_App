@@ -24,13 +24,15 @@ import com.example.to_do_list_app.Model.Task;
 import com.example.to_do_list_app.Utils.DataBaseHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.Objects;
+
 public class AddNewTask extends BottomSheetDialogFragment {
     public static final String TAG = "ActionBottomDialog";
     private EditText newTask;
     private Button addTaskButton;
     private DataBaseHandler db;
 
-    public static AddNewTask newTask(){
+    public static AddNewTask newInstance(){
         return new AddNewTask();
     }
 
@@ -52,7 +54,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        newTask = getView().findViewById(R.id.newTask);
+        newTask = requireView().findViewById(R.id.newTask);
         addTaskButton = getView().findViewById(R.id.btnAddTask);
 
         db = new DataBaseHandler(getActivity());
@@ -64,34 +66,35 @@ public class AddNewTask extends BottomSheetDialogFragment {
             isUpdate = true;
             String task = bundle.getString("task");
             newTask.setText(task);
-            if (task.length()>0){
-                addTaskButton.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
+            assert task != null;
+            if (task.length()>0) {
+                addTaskButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
             }
-            newTask.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if(charSequence.toString().equals("")){
-                        addTaskButton.setEnabled(false);
-                        addTaskButton.setTextColor(Color.GRAY);
-                    }
-                    else {
-                        addTaskButton.setEnabled(true);
-                        addTaskButton.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
-                    }
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                }
-            });
         }
+        newTask.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.toString().equals("")){
+                    addTaskButton.setEnabled(false);
+                    addTaskButton.setTextColor(Color.GRAY);
+                }
+                else {
+                    addTaskButton.setEnabled(true);
+                    addTaskButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         boolean finalIsUpdate = isUpdate;
         addTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +108,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
                     Task task = new Task();
                     task.setTask(text);
                     task.setStatus(0);
+                    db.insertTask(task);
                 }
                 dismiss();
             }

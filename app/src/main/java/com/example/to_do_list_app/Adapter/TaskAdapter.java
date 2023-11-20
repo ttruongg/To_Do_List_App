@@ -1,5 +1,6 @@
 package com.example.to_do_list_app.Adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -34,6 +35,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void setData(List<Task> taskList){
         this.taskList = taskList;
         notifyDataSetChanged();
+    }
+
+    public Context getContext(){
+        return activity;
+    }
+
+    public void deleteTask(int position){
+        Task task = taskList.get(position);
+        db.deleteTask(task.getId());
+        taskList.remove(position);
+        notifyItemRemoved(position);
     }
 
     public void updateItem(int position){

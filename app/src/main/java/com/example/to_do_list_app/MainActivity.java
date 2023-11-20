@@ -1,6 +1,7 @@
 package com.example.to_do_list_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.DialogInterface;
@@ -33,12 +34,16 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
         db = new DataBaseHandler(this);
         db.OpenDB();
-        taskList = new ArrayList<>();
+
+       // taskList = new ArrayList<>();
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.tasksRecyclerView.setLayoutManager(layoutManager);
-        taskAdapter = new TaskAdapter(this, db);
+        taskAdapter = new TaskAdapter(MainActivity.this, db);
         binding.tasksRecyclerView.setAdapter(taskAdapter);
 
+        ItemTouchHelper imtemtochhelper = new ItemTouchHelper(new RecyclerItemTouch(taskAdapter));
+        imtemtochhelper.attachToRecyclerView(binding.tasksRecyclerView);
 
         taskList = db.getAllTask();
         Collections.reverse(taskList);
@@ -47,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddNewTask.newTask().show(getSupportFragmentManager(), AddNewTask.TAG);
+                AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
             }
         });
 

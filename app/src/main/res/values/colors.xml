@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="buttonTint_CheckBox">#3D52D3</color>
     <color name="green">#9DDF56</color>
+    <color name="gray">#45403939</color>
+    <color name="blue">#586ADA</color>
 </resources>
