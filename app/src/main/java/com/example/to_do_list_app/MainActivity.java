@@ -37,18 +37,22 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
        // taskList = new ArrayList<>();
 
+        //set up recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.tasksRecyclerView.setLayoutManager(layoutManager);
         taskAdapter = new TaskAdapter(MainActivity.this, db);
         binding.tasksRecyclerView.setAdapter(taskAdapter);
 
+        //swipe
         ItemTouchHelper imtemtochhelper = new ItemTouchHelper(new RecyclerItemTouch(taskAdapter));
         imtemtochhelper.attachToRecyclerView(binding.tasksRecyclerView);
 
+        //data
         taskList = db.getAllTask();
         Collections.reverse(taskList);
         taskAdapter.setData(taskList);
 
+        //handle event of the floating button
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

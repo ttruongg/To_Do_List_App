@@ -27,6 +27,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     private MainActivity activity;
     private DataBaseHandler db;
 
+    //contructor
     public TaskAdapter(MainActivity activity, DataBaseHandler db) {
         this.activity = activity;
         this.db = db;
@@ -41,6 +42,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         return activity;
     }
 
+    //delete task
     public void deleteTask(int position){
         Task task = taskList.get(position);
         db.deleteTask(task.getId());
@@ -48,6 +50,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         notifyItemRemoved(position);
     }
 
+    // edit task
     public void updateItem(int position){
         Task task = taskList.get(position);
         Bundle bundle = new Bundle();

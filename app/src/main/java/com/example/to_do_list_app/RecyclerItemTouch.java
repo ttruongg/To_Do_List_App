@@ -38,6 +38,9 @@ public class RecyclerItemTouch extends ItemTouchHelper.SimpleCallback {
             AlertDialog.Builder dialog = new AlertDialog.Builder(adapter.getContext());
             dialog.setTitle("Delete Task");
             dialog.setMessage("Do you want to delete this task?");
+
+
+
             dialog.setPositiveButton("Confirm",
                     new DialogInterface.OnClickListener() {
                         @Override
@@ -82,21 +85,21 @@ public class RecyclerItemTouch extends ItemTouchHelper.SimpleCallback {
         int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
         int iconBottom = iconTop + icon.getIntrinsicHeight();
 
-        if (dX > 0) { // Swiping to the right
+        if (dX > 0) { //  right
             int iconLeft = itemView.getLeft() + iconMargin;
             int iconRight = itemView.getLeft() + iconMargin + icon.getIntrinsicWidth();
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
 
             background.setBounds(itemView.getLeft(), itemView.getTop(),
                     itemView.getLeft() + ((int) dX) + backgroundCornerOffset, itemView.getBottom());
-        } else if (dX < 0) { // Swiping to the left
+        } else if (dX < 0) { //  left
             int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
             int iconRight = itemView.getRight() - iconMargin;
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
 
             background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
                     itemView.getTop(), itemView.getRight(), itemView.getBottom());
-        } else { // view is unSwiped
+        } else { //  unSwiped
             background.setBounds(0, 0, 0, 0);
         }
 
