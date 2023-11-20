@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
+
     android:layout_margin="10dp">
 
     <RelativeLayout
@@ -15,6 +16,7 @@
             android:id="@+id/todoCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="This is a task, for example."
             android:paddingStart="8dp" />
 
